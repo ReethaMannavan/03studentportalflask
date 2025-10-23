@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import sqlite3
 from flask_mail import Mail, Message
 from database import init_db
-from database import DB_PATH
-
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -43,8 +41,7 @@ def register():
         flash("❌ Phone number must be exactly 10 digits.", "danger")
         return redirect(url_for('home'))
 
-    conn = sqlite3.connect(DB_PATH)
-
+    conn = sqlite3.connect("student_portal.db")
     cur = conn.cursor()
     try:
         cur.execute("INSERT INTO students (name, email, phone, course, address) VALUES (?, ?, ?, ?, ?)",
@@ -74,8 +71,7 @@ def admin_login():
         username = request.form['username']
         password = request.form['password']
 
-        conn = sqlite3.connect(DB_PATH)
-
+        conn = sqlite3.connect("student_portal.db")
         cur = conn.cursor()
         cur.execute("SELECT * FROM admin WHERE username=? AND password=?", (username, password))
         admin = cur.fetchone()
@@ -94,8 +90,7 @@ def admin_dashboard():
     if 'admin' not in session:
         return redirect(url_for('admin_login'))
 
-    conn = sqlite3.connect(DB_PATH)
-
+    conn = sqlite3.connect("student_portal.db")
     cur = conn.cursor()
     cur.execute("SELECT * FROM students")
     students = cur.fetchall()
@@ -108,8 +103,7 @@ def update_status(student_id, new_status):
     if 'admin' not in session:
         return redirect(url_for('admin_login'))
 
-    conn = sqlite3.connect(DB_PATH)
-
+    conn = sqlite3.connect("student_portal.db")
     cur = conn.cursor()
     cur.execute("SELECT name, email, course FROM students WHERE id=?", (student_id,))
     student = cur.fetchone()
@@ -138,4 +132,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
