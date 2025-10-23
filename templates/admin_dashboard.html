@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3>📋 Student Applications</h3>
+  <a href="/logout" class="btn btn-light btn-sm text-dark">Logout</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-striped table-hover bg-light text-dark align-middle">
+    <thead class="table-dark text-center">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Course</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in students %}
+      <tr class="text-center">
+        <td>{{ s[0] }}</td>
+        <td>{{ s[1] }}</td>
+        <td>{{ s[2] }}</td>
+        <td>{{ s[3] }}</td>
+        <td>{{ s[4] }}</td>
+        <td>
+          {% if s[6] == "Pending" %}
+            <span class="badge bg-warning text-dark">Pending</span>
+          {% elif s[6] == "Approved" %}
+            <span class="badge bg-success">Approved</span>
+          {% elif s[6] == "Rejected" %}
+            <span class="badge bg-danger">Rejected</span>
+          {% endif %}
+        </td>
+        <td>
+          {% if s[6] == "Pending" %}
+            <a href="/update_status/{{ s[0] }}/Approved" class="btn btn-success btn-sm me-1">Approve</a>
+            <a href="/update_status/{{ s[0] }}/Rejected" class="btn btn-danger btn-sm">Reject</a>
+          {% elif s[6] == "Approved" %}
+            <button class="btn btn-outline-success btn-sm" disabled>✅ Approved</button>
+          {% elif s[6] == "Rejected" %}
+            <button class="btn btn-outline-danger btn-sm" disabled>❌ Rejected</button>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

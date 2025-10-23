@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mx-auto p-4" style="max-width:600px;">
+  <div class="card-header text-center fs-4">Student Admission Form</div>
+  <form method="POST" action="/register" class="card-body">
+    <input type="text" name="name" class="form-control mb-3" placeholder="Full Name" required>
+    <input type="email" name="email" class="form-control mb-3" placeholder="Email" required>
+    <input type="text" name="phone" class="form-control mb-3" placeholder="Phone Number" required>
+    <select name="course" class="form-select mb-3" required>
+      <option value="">-- Select Course --</option>
+      <option>Python Full Stack</option>
+      <option>Java Full Stack</option>
+      <option>Data Analysis</option>
+      <option>AI & Machine Learning</option>
+      <option>UI/UX Design</option>
+      <option>Cloud Computing</option>
+    </select>
+    <textarea name="address" class="form-control mb-3" placeholder="Address" rows="3" required></textarea>
+    <button type="submit" class="btn btn-custom w-100">Submit Application</button>
+  </form>
+</div>
+{% endblock %}

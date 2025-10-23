@@ -1,0 +1,6 @@
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fb; }
+.card { border-radius: 12px; }
+.btn-primary { background: linear-gradient(90deg,#4b6cb7,#aa6587); border: none; }
+.table-hover tbody tr:hover { background: #eef4ff; }
+.navbar .nav-link.btn { transition: 0.25s; }
+.navbar .nav-link.btn:hover { background: #182848 !important; color: #fff !important; }
