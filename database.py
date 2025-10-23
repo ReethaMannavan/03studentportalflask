@@ -1,8 +1,10 @@
 import sqlite3
 import os
 
+DB_PATH = os.path.join("/tmp", "student_portal.db")
+
 def init_db():
-    DB_PATH = os.path.join("/tmp", "student_portal.db")
+   
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
@@ -35,4 +37,5 @@ def init_db():
 
 if __name__ == "__main__":
     init_db()
+
 
